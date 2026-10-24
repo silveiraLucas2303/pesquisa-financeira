@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Um quiz simples para entender sua vida financeira e descobrir seus próximos passos.">
+  <title>Meu próximo passo financeiro</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="vendor/pdf-lib.min.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="app-shell">
+    <div class="card" id="card">
+      <header class="card-header">
+        <p class="eyebrow">Seu dinheiro, com mais clareza</p>
+        <h1>Meu próximo passo financeiro</h1>
+        <p class="privacy">Quiz rápido · Suas respostas ficam apenas nesta página</p>
+      </header>
+
+      <section id="quiz" aria-labelledby="question-title">
+        <div class="progress-top"><span id="question-count"></span><span id="progress-percent"></span></div>
+        <div class="progress-track" aria-hidden="true"><div id="progress-fill"></div></div>
+        <div class="question-header">
+          <h2 id="question-title" tabindex="-1"></h2>
+          <p id="question-help"></p>
+        </div>
+        <form id="answer-form" novalidate>
+          <div id="answer-content"></div>
+          <p id="answer-error" class="error" role="alert"></p>
+          <div id="answer-actions" class="actions"></div>
+        </form>
+      </section>
+
+      <section id="report" aria-labelledby="report-title" hidden>
+        <p class="result-label">Seu resultado</p>
+        <h2 id="report-title" tabindex="-1">Seu retrato financeiro</h2>
+        <p id="report-subtitle" class="report-subtitle">Um plano simples a partir das suas respostas.</p>
+
+        <section class="recommendations" aria-labelledby="recommendations-title">
+          <p class="section-kicker">Comece por aqui</p>
+          <h3 id="recommendations-title">Seus próximos passos</h3>
+          <p id="steps-intro" class="steps-intro"></p>
+          <ol id="recommendations-list"></ol>
+          <p class="verse-note">Trechos da Bíblia NAA. As sugestões práticas são reflexões inspiradas nessas passagens.</p>
+        </section>
+
+        <section class="portrait" aria-labelledby="portrait-title">
+          <h3 id="portrait-title">Onde você está hoje</h3>
+          <p id="portrait-text"></p>
+        </section>
+        <div class="insights">
+          <section class="insight-box strengths" aria-labelledby="strengths-title">
+            <h3 id="strengths-title">Pontos fortes</h3>
+            <ul id="strengths-list"></ul>
+          </section>
+          <section class="insight-box attention" aria-labelledby="attention-title">
+            <h3 id="attention-title">Pontos de atenção</h3>
+            <ul id="attention-list"></ul>
+          </section>
+        </div>
+        <section class="goal-plan" aria-labelledby="goal-title">
+          <p class="section-kicker">Olhando para a frente</p>
+          <h3 id="goal-title">Seu objetivo</h3>
+          <p id="goal-text"></p>
+        </section>
+        <section id="numbers-panel" class="numbers-panel" aria-labelledby="numbers-title">
+          <h3 id="numbers-title">Seu panorama em números</h3>
+          <p>Valores aproximados para apoiar suas decisões.</p>
+          <div class="summary" aria-label="Resumo financeiro mensal">
+            <div class="summary-item"><span>Renda média</span><strong id="income-total"></strong></div>
+            <div class="summary-item"><span>Gastos médios</span><strong id="expense-total"></strong></div>
+            <div class="summary-item balance" id="balance-card"><span>Saldo estimado</span><strong id="balance-total"></strong></div>
+          </div>
+          <details class="breakdown">
+            <summary>Ver gastos por categoria</summary>
+            <ul id="expense-list"></ul>
+          </details>
+        </section>
+        <div class="education-note">
+          <strong id="education-title">Sobre investimentos</strong>
+          <p id="education-text"></p>
+          <p>Saiba mais no <a href="https://www.bcb.gov.br/meubc/faqs/s/educacao-financeira-sub" target="_blank" rel="noopener noreferrer">Banco Central</a> e no <a href="https://www.gov.br/investidor/pt-br/investir/antes-de-investir/respeite-o-seu-perfil-de-investidor/entenda-o-suitability" target="_blank" rel="noopener noreferrer">Portal do Investidor</a>.</p>
+        </div>
+        <p id="report-footnote" class="footnote">A página não salva suas respostas nem envia informações para um servidor.</p>
+        <div class="report-actions">
+          <button id="review" type="button" class="secondary">Rever respostas</button>
+          <button id="download-pdf" type="button" class="primary">Baixar relatório em PDF</button>
+        </div>
+        <p id="download-status" class="download-status" role="alert"></p>
+      </section>
+    </div>
+  </main>
+  <dialog id="name-dialog" class="name-dialog" aria-labelledby="name-dialog-title" aria-describedby="name-dialog-help">
+    <form id="name-form">
+      <p class="section-kicker">Quase pronto</p>
+      <h2 id="name-dialog-title">Qual nome deve aparecer no relatório?</h2>
+      <p id="name-dialog-help">O nome aparecerá no PDF e no arquivo baixado. Você pode informar apenas o primeiro nome.</p>
+      <label for="participant-name" class="field-label">Nome</label>
+      <input id="participant-name" name="participant-name" type="text" maxlength="80" autocomplete="off" required placeholder="Seu nome">
+      <div class="dialog-actions">
+        <button id="cancel-download" type="button" class="secondary">Cancelar</button>
+        <button type="submit" class="primary">Baixar PDF</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>
